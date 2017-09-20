@@ -15,9 +15,17 @@ def euler(f, t, y, h, n):
 	
 	return points
 
+def euler_method(f, t, y, h):
+	
+	k1 = f.subs('t', t).subs('y', y)  # substitute t then y
+	y = y + h * k1
+	
+	return y
+
 
 def euler_enhanced(f, t, y, h, n):
 	#Euler Enhanced (Aprimorado)
+	
 	print "Running Euler Enhanced"
 	points = ["{0} {1}\n".format(t, y)]             # save point as a string with the following format: "t y\n"
 	

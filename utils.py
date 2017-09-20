@@ -1,7 +1,7 @@
 import sympy as sp
 import os
 import subprocess
-from implementations import eulers
+from implementations import *
 
 def getFunction():
 	while True:
@@ -46,7 +46,7 @@ def getNandH():
 
 def plot(method):
 	
-	print "Running shell commands... might take a while."
+	print "Running shell commands... might take a while.\n"
 	
 	p = subprocess.Popen("cat \"implementations/results/{0}.conf\" | gnuplot".format(method), shell=True)
 	os.waitpid(p.pid, 0)
@@ -54,7 +54,7 @@ def plot(method):
 	p = subprocess.Popen("xdg-open \"implementations/results/{0}.png\"".format(method), shell=True)
 	os.waitpid(p.pid, 0)
 	
-	print "Done!\n"
+	print "Done!"
 
 
 def generateGnuPlotConf(pts, method):
@@ -114,3 +114,5 @@ def runEulers():
 	print "\nHave a great day!"
 
 	return
+
+runMethod(runge.runge, 'Runge-Kutta')
