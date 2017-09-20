@@ -1,7 +1,7 @@
 import sympy as sp
 import os
 import subprocess
-
+from implementations import eulers
 
 def getFunction():
 	while True:
@@ -11,7 +11,7 @@ def getFunction():
 			expr = sp.sympify(string)  # turn string expression into Sympy expression
 			break
 		except:
-			print "Please try again, invalid input: {}", string
+			print "Please try again, invalid input: ", string
 	
 	return expr
 
@@ -45,47 +45,72 @@ def getNandH():
 
 
 def plot(method):
-	p = subprocess.Popen("cat implementations/{0}.conf | gnuplot".format(method), shell=True)
+	
+	print "Running shell commands... might take a while."
+	
+	p = subprocess.Popen("cat \"implementations/results/{0}.conf\" | gnuplot".format(method), shell=True)
+	os.waitpid(p.pid, 0)
+
+	p = subprocess.Popen("xdg-open \"implementations/results/{0}.png\"".format(method), shell=True)
 	os.waitpid(p.pid, 0)
 	
-	p = subprocess.Popen("xdg-open implementations/{0}.png".format(method), shell=True)
-	os.waitpid(p.pid, 0)
+	print "Done!\n"
 
 
 def generateGnuPlotConf(pts, method):
 	# write points to file:
 	
-	f = open('implementations/{0}_points.txt'.format(method), 'w')
+	f = open('implementations/results/{0}_points.txt'.format(method), 'w')
 	f.writelines(pts)
 	f.close()
 	
 	# generate gnuplot configuration file:
 	conf = '''\tset terminal png truecolor
-			set output "implementations/{0}.png"
+			set output "implementations/results/{0}.png"
 			set autoscale
 			set style data lines
-			plot "implementations/{0}_points.txt" using 1:2 title "{0}"'''.format(method)
+			plot "implementations/results/{0}_points.txt" using 1:2 title "{0}"'''.format(method)
 	
-	f = open('implementations/{0}.conf'.format(method), 'w')
+	f = open('implementations/results/{0}.conf'.format(method), 'w')
 	f.writelines(conf)
 	f.close()
 
-def runMethod(func, name):
+def runMethod(method, name):
 	f = getFunction()
-	
+
 	t, y = getPoint(0)
-	
+
 	h, n = getNandH()
-	
-	points = func(f, t, y, h, n)
+
+	points = method(f, t, y, h, n)
 	
 	generateGnuPlotConf(points, name)
 	
 	plot(name)
-	
-	print "Have a great day"
-	
+
+	print "\nHave a great day!"
+
 	return
 
-from implementations import euler
-runMethod(euler.euler, 'euler')
+def runEulers():
+	
+	f = getFunction()
+
+	t, y = getPoint(0)
+
+	h, n = getNandH()
+
+	points = eulers.euler(f, t, y, h, n)
+	points1 = eulers.euler_enhanced(f, t, y, h, n)
+	points2 = eulers.euler_inverted(f, t, y, h, n)
+
+	generateGnuPlotConf(points, 'Euler')
+	plot('Euler')
+	generateGnuPlotConf(points1, "EulerEnhanced")
+	plot("EulerEnhanced")
+	generateGnuPlotConf(points2, "EulerInverted")
+	plot("EulerInverted")
+
+	print "\nHave a great day!"
+
+	return
