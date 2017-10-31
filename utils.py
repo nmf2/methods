@@ -3,6 +3,8 @@ import os
 import subprocess
 from implementations import *
 
+from sympy import Point2D
+
 def getFunction():
 	while True:
 		string = ''
@@ -92,7 +94,7 @@ def runMethod(method, name):
 
 	return
 
-def runEulers():
+def runAllEulers():
 	
 	f = getFunction()
 
@@ -115,4 +117,20 @@ def runEulers():
 
 	return
 
-runMethod(runge.runge, 'Runge-Kutta')
+def runAdams(method, name, order):
+	f = getFunction()
+	
+	p = []
+	for i in range(order):
+		p.insert(0,Point2D(getPoint(i)))
+	
+	h, n = getNandH()
+	
+	points = method(f, p, h, n, order)
+	
+	generateGnuPlotConf(points, name)
+	plot(name)
+	
+	return
+	
+runAdams(adams_bashforth.method, 'Adams-bashforth', 4)

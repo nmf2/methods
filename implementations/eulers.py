@@ -1,6 +1,7 @@
 from sympy import Symbol
 from sympy import solvers
 from sympy import Eq
+
 def euler(f, t, y, h, n):
 	
 	print "Running Euler"
@@ -14,14 +15,6 @@ def euler(f, t, y, h, n):
 		points.append("{0} {1}\n".format(t, y))
 	
 	return points
-
-def euler_method(f, t, y, h):
-	
-	k1 = f.subs('t', t).subs('y', y)  # substitute t then y
-	y = y + h * k1
-	
-	return y
-
 
 def euler_enhanced(f, t, y, h, n):
 	#Euler Enhanced (Aprimorado)
@@ -44,7 +37,7 @@ def euler_inverted(f, t, y, h, n):
 	# Euler Inverted (Inverso)
 	points = ["{0} {1}\n".format(t, y)]             # save point as a string with the following format: "t y\n"
 	print "Running Euler Inverted"
-	symbol_y = Symbol('y')
+	symbol_y = Symbol('y')                          # yn+1
 	
 	for i in range(n):
 		t = t + h

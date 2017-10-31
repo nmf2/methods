@@ -4,7 +4,7 @@ def runge(f, t, y, h, n):
 	
 	for i in range(n):
 		k1 = f.subs('t',t).subs('y',y)
-		k2 = f.subs('t', t+h/2).subs('y',  k1*h/2 + y)
+		k2 = f.subs('t', t + h/2).subs('y',  k1 * h/2 + y)
 		k3 = f.subs('t', t + h / 2).subs('y', k2 * h / 2 + y)
 		k4 = f.subs('t', t + h ).subs('y', k3 * h + y)
 		
