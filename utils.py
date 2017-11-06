@@ -60,9 +60,15 @@ def plot(method):
 
 
 def generateGnuPlotConf(pts, method):
-	# write points to file:
 	
-	f = open('implementations/results/{0}_points.txt'.format(method), 'w')
+	# ensure directory exists
+	
+	directory = os.path.dirname('implementations/results/')
+	if not os.path.exists(directory):
+		os.makedirs(directory)
+
+	# write points to file:
+	f = open('implementations/results/{0}_points.txt'.format(method), 'w+')
 	f.writelines(pts)
 	f.close()
 	

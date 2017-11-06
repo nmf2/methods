@@ -1,4 +1,4 @@
 .idea
-implementations/__init__.pyc
-implementations/results/
+*.pyc
+implementations/results
 
