@@ -139,4 +139,4 @@ def runAdams(method, name, order):
 	
 	return
 	
-runAdams(adams_bashforth.method, 'Adams-bashforth', 4)
+runAdams(adams_bashforth.method, 'Adams-bashforth', 6)
