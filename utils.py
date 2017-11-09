@@ -2,9 +2,11 @@ import sympy as sp
 import os
 import subprocess
 from implementations import *
-import implementations
-
+from matplotlib import pyplot as plt
 from sympy import Point2D
+
+pts = [Point2D(0, 1), Point2D(0.1, 1.6089333), Point2D(0.2, 2.5050062), Point2D(0.3, 3.8304083)]
+pts.reverse()
 
 def getFunction():
     while True:
@@ -139,20 +141,32 @@ def runAdamsBash(method, name, order):
     return
         
 def runAdamsMoulton(method, name, order):
-    f = getFunction()
+    # f = getFunction()
+    #
+    # p = []
+    # print '\nObs: Adams-Moulton of order k needs only k-1 points\n'
+    # for i in range(order - 1):
+    #     p.insert(0,Point2D(getPoint(i)))
+    #
+    # h, n = getNandH()
+    f = sp.sympify('1 - t + 4*y')
+    
+    h = 0.1
+    n = 5
+    
+    points, ys, ts = method(f, pts[1:], h, n, order)
 
-    p = []
-    print '\nObs: Adams-Moulton of order k needs only k-1 points\n'
-    for i in range(order - 1):
-        p.insert(0,Point2D(getPoint(i)))
-        
-    h, n = getNandH()
-        
-    points = method(f, p, h, n, order)
+    plt.plot(ts, ys)
+    
+    plt.xlabel('t')
+    plt.ylabel('y')
+    plt.title(name)
+    
+    plt.show()
         
     generateGnuPlotConf(points, name)
     plot(name)
-        
+
     return
 
-runAdamsMoulton(adams_moulton.method, 'Adams-Moulton', 4)
+runAdamsBash(adams_bashforth.method, 'Adams-Bash', 4)
