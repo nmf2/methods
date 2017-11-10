@@ -39,7 +39,7 @@ def method(f, p, h, n, order):
             
             ys.append(p[1].y)
             ts.append(p[1].x)
-            print "y(%.4f) = %.7f" %(ts[-1], y[-1])
+            print "y(%.4f) = %.7f" %(ts[-1], ys[-1])
         return points, ys, ts
         
     if order == 2:
@@ -76,7 +76,7 @@ def method(f, p, h, n, order):
             
             ys.append(p[1].y)
             ts.append(p[1].x)
-            print "y(%.4f) = %.7f" %(ts[-1], y[-1])
+            print "y(%.4f) = %.7f" %(ts[-1], ys[-1])
         return points, ys, ts
         
     if order == 4:
@@ -96,7 +96,7 @@ def method(f, p, h, n, order):
             
             ys.append(p[1].y)
             ts.append(p[1].x)
-            print "y(%.4f) = %.7f" %(ts[-1], y[-1])
+            print "y(%.4f) = %.7f" %(ts[-1], ys[-1])
         return points, ys, ts
 
     if order == 5:
@@ -115,7 +115,7 @@ def method(f, p, h, n, order):
             
             ys.append(p[1].y)
             ts.append(p[1].x)
-            print "y(%.4f) = %.7f" %(ts[-1], y[-1])
+            print "y(%.4f) = %.7f" %(ts[-1], ys[-1])
         return points, ys, ts
         
     if order == 6:
@@ -135,7 +135,7 @@ def method(f, p, h, n, order):
             
             ys.append(p[1].y)
             ts.append(p[1].x)
-            print "y(%.4f) = %.7f" %(ts[-1], y[-1])
+            print "y(%.4f) = %.7f" %(ts[-1], ys[-1])
         return points, ys, ts
 
 def calc_fk(f, p):
