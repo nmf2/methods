@@ -5,35 +5,43 @@ def method(f, p, h, n, order):
         
     points = []
     y = 0
-    #ys = []
-    #ts = []
+    ys = []
+    ts = []
     for i in range(order):
         points.insert(0, "{0} {1}\n".format(float(p[i].x), float(p[i].y)))
-        #ys.insert(0, p[i].y)
-        #ts.insert(0, p[i].x)
+        ys.insert(0, p[i].y)
+        ts.insert(0, p[i].x)
         
     if order == 1:
         for i in range(n + order -1):
             fk = calc_fk(f, p)
+            
             y = p[0].y + h * fk[0]
 
             p.insert(0, Point2D(float(p[0].x + h), float(y)))           # inserts the point that was just found into the beginning of the list
             p.pop(-1)                                                   # removes the last item of the list
-
+            
             points.append("{0} {1}\n".format(float(p[0].x), float(p[0].y)))
+            ts.append(p[0].x)
+            ys.append(p[0].y)
+            
         
-        return points
+        return points, ys, ts
         
     if order == 2:
         for i in range(n + order -1):
             fk = calc_fk(f, p)
+            
             y = p[0].y + (h/2)*( (3)*fk[0] - fk[1] )
             
             p.insert(0, Point2D(float(p[0].x + h), float(y)))           # inserts the point that was just found into the beginning of the list
             p.pop(-1)                                                   # removes the last item of the list
-
+            
             points.append("{0} {1}\n".format(float(p[0].x), float(p[0].y)))
-        return points
+            ts.append(p[0].x)
+            ys.append(p[0].y)
+            
+        return points, ys, ts
         
     if order == 3:
         for i in range(n + order-1):
@@ -42,9 +50,12 @@ def method(f, p, h, n, order):
             
             p.insert(0, Point2D(float(p[0].x + h), float(y)))           # inserts the point that was just found into the beginning of the list
             p.pop(-1)                                                   # removes the last item of the list
-
+            
             points.append("{0} {1}\n".format(float(p[0].x), float(p[0].y)))
-        return points
+            ts.append(p[0].x)
+            ys.append(p[0].y)
+            
+        return points, ys, ts
         
     if order == 4:
         for i in range(n):
@@ -54,31 +65,43 @@ def method(f, p, h, n, order):
         
             p.insert(0, Point2D(float(p[0].x + h), float(y)))           # inserts the point that was just found into the beginning of the list
             p.pop(-1)                                                   # removes the last item of the list fn
+        
+            points.append("{0} {1}\n".format(float(p[0].x), float(p[0].y)))
+            ts.append(p[0].x)
+            ys.append(p[0].y)
             
-            points.append( "{0} {1}\n".format(float(p[0].x), float(p[0].y)))
-        return points
+        return points, ys, ts
 
     if order == 5:
         for i in range(n):
             fk = calc_fk(f, p)
+            
             y = p[0].y + (h/720)*( (1901)*fk[0] - (2774)*fk[1] + (2616)*fk[2] - (1274)*fk[3] + (251)*fk[4])
             
             p.insert(0, Point2D(float(p[0].x + h), float(y)))           # inserts the point that was just found into the beginning of the list
             p.pop(-1)                                                   # removes the last item of the list
-
+            
             points.append("{0} {1}\n".format(float(p[0].x), float(p[0].y)))
-        return points
+            ts.append(p[0].x)
+            ys.append(p[0].y)
+            
+        return points, ys, ts
         
     if order == 6:
         for i in range(n):
             fk = calc_fk(f, p)
+            
             y = p[0].y + (h/1440)*( (4277)*fk[0] - (7923)*fk[1] + (9982)*fk[2] - (7298)*fk[3] + (2877)*fk[4] - (475)*fk[5])
 
             p.insert(0, Point2D(float(p[0].x + h), float(y)))           # inserts the point that was just found into the beginning of the list
             p.pop(-1)                                                   # removes the last item of the list
             
+        
             points.append("{0} {1}\n".format(float(p[0].x), float(p[0].y)))
-        return points
+            ts.append(p[0].x)
+            ys.append(p[0].y)
+            
+        return points, ys, ts
 
 
 def calc_fk(f, p):

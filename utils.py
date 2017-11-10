@@ -5,9 +5,6 @@ from implementations import *
 from matplotlib import pyplot as plt
 from sympy import Point2D
 
-pts = [Point2D(0, 1), Point2D(0.1, 1.6089333), Point2D(0.2, 2.5050062), Point2D(0.3, 3.8304083)]
-pts.reverse()
-
 def getFunction():
     while True:
         string = ''
@@ -47,59 +44,25 @@ def getNandH():
     return h, n
 
 
-def plot(method):
-        
-    print "Running shell commands... might take a while.\n"
-        
-    p = subprocess.Popen("cat \"implementations/results/{0}.conf\" | gnuplot".format(method), shell=True)
-    os.waitpid(p.pid, 0)
-
-    p = subprocess.Popen("xdg-open \"implementations/results/{0}.png\"".format(method), shell=True)
-    os.waitpid(p.pid, 0)
-        
-    print "Done!"
-
-
-def generateGnuPlotConf(pts, method):
-        
-    # ensure directory exists
-        
-    directory = os.path.dirname('implementations/results/')
-    if not os.path.exists(directory):
-        os.makedirs(directory)
-
-    # write points to file:
-    f = open('implementations/results/{0}_points.txt'.format(method), 'w+')
-    f.writelines(pts)
-    f.close()
-        
-    # generate gnuplot configuration file:
-    conf = '''\tset terminal png truecolor
-            set output "implementations/results/{0}.png"
-            set autoscale
-            set style data lines
-            plot "implementations/results/{0}_points.txt" using 1:2 title "{0}"'''.format(method)
-        
-    f = open('implementations/results/{0}.conf'.format(method), 'w')
-    f.writelines(conf)
-    f.close()
-
-def runMethod(method, name):
+def runSimpleMethod(method, name):
     f = getFunction()
 
     t, y = getPoint(0)
 
     h, n = getNandH()
 
-    points = method(f, t, y, h, n)
-        
-    generateGnuPlotConf(points, name)
-        
-    plot(name)
+    ts, ys = method(f, t, y, h, n)
+    
+    plt.plot(ts, ys)
+    plt.xlabel('t')
+    plt.ylabel('y')
+    plt.title(name)
+    
+    plt.show()
 
     print "\nHave a great day!"
 
-    return
+    return ts, ys
 
 def runAllEulers():
         
@@ -109,22 +72,27 @@ def runAllEulers():
 
     h, n = getNandH()
 
-    points = eulers.euler(f, t, y, h, n)
-    points1 = eulers.euler_enhanced(f, t, y, h, n)
-    points2 = eulers.euler_inverted(f, t, y, h, n)
-
-    generateGnuPlotConf(points, 'Euler')
-    plot('Euler')
-    generateGnuPlotConf(points1, "EulerEnhanced")
-    plot("EulerEnhanced")
-    generateGnuPlotConf(points2, "EulerInverted")
-    plot("EulerInverted")
+    ts1, ys1 = eulers.simple_euler(f, t, y, h, n)
+    ts2, ys2 = eulers.improved_euler(f, t, y, h, n)
+    ts3, ys3 = eulers.inverse_euler(f, t, y, h, n)
+    
+    #plot config
+    plt.plot(ts1, ys1, label='Simple Euler')
+    plt.plot(ts2, ys2, label='Improved Euler')
+    plt.plot(ts3, ys3, label='Inverse Euler')
+    plt.xlabel('t')
+    plt.ylabel('y')
+    plt.title("All Euler Methods")
+    
+    #show plot
+    plt.show()
 
     print "\nHave a great day!"
 
     return
 
-def runAdamsBash(method, name, order):
+def runAdamsBash(order):
+    name = "Adams-Bashforth Method"
     f = getFunction()
         
     p = []
@@ -133,28 +101,32 @@ def runAdamsBash(method, name, order):
 
     h, n = getNandH()
         
-    points = method(f, p, h, n, order)
-        
-    generateGnuPlotConf(points, name)
-    plot(name)
-        
-    return
-        
-def runAdamsMoulton(method, name, order):
-    # f = getFunction()
-    #
-    # p = []
-    # print '\nObs: Adams-Moulton of order k needs only k-1 points\n'
-    # for i in range(order - 1):
-    #     p.insert(0,Point2D(getPoint(i)))
-    #
-    # h, n = getNandH()
-    f = sp.sympify('1 - t + 4*y')
+    points, ys, ts = adams_bashforth.method(f, p, h, n, order)
+
+    plt.plot(ts, ys)
+
+    plt.xlabel('t')
+    plt.ylabel('y')
+    plt.title(name)
+
+    plt.show()
     
-    h = 0.1
-    n = 5
+    return ts, ys
+def runAdamsMoulton(order):
+    name = "Adams-Moulton Method"
+    f = getFunction()
+    p = []
     
-    points, ys, ts = method(f, pts[1:], h, n, order)
+    print '\nObs: Adams-Moulton of order k needs only k-1 points\n'
+    
+    
+    if order == 1: order = 2                #makes sure at least one point is asked for
+    for i in range(order - 1):
+        p.insert(0,Point2D(getPoint(i)))
+
+    h, n = getNandH()
+    
+    points, ys, ts = adams_moulton.method(f, p, h, n, order)
 
     plt.plot(ts, ys)
     
@@ -163,10 +135,5 @@ def runAdamsMoulton(method, name, order):
     plt.title(name)
     
     plt.show()
-        
-    generateGnuPlotConf(points, name)
-    plot(name)
-
-    return
-
-runAdamsBash(adams_bashforth.method, 'Adams-Bash', 4)
+    
+    return ts, ys

@@ -13,7 +13,10 @@ def method(f, p, h, n, order):
     y = 0
 
     # setup first point
-    for i in range(order - 2):
+    
+    if order == 1: order = 2  # makes sure at least one point is asked for
+    
+    for i in range(order-1):
         points.insert(0,"{0} {1}\n".format(float(p[i].x), float(p[i].y)))
         ys.insert(0, p[i].y)
         ts.insert(0, p[i].x)

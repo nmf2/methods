@@ -2,25 +2,27 @@ from sympy import Symbol
 from sympy import solvers
 from sympy import Eq
 
-def euler(f, t, y, h, n):
+def simple_euler(f, t, y, h, n):
+	#Simple Euler
 	
-	print "Running Euler"
-	points = ["{0} {1}\n".format(t, y)]  # save point as a string with the following format: "t y\n"
+	print "Running Simple Euler Method"
+	ts = [t]
+	ys = [y]
 	
 	for i in range(n):
 		k1 = f.subs('t', t).subs('y', y)  # substitute t then y
 		y = y + h * k1
 		t = t + h
 		
-		points.append("{0} {1}\n".format(t, y))
+		ts.append(t)
+		ys.append(y)
 	
-	return points
+	return ts, ys
 
-def euler_enhanced(f, t, y, h, n):
-	#Euler Enhanced (Aprimorado)
-	
-	print "Running Euler Enhanced"
-	points = ["{0} {1}\n".format(t, y)]             # save point as a string with the following format: "t y\n"
+def improved_euler(f, t, y, h, n):
+	print "Running Improved Euler Method"
+	ts = [t]
+	ys = [y]
 	
 	for i in range(n):
 		k1 = f.subs('t', t).subs('y', y)            # substitute t then y
@@ -28,15 +30,17 @@ def euler_enhanced(f, t, y, h, n):
 		y = y + (h/2)*(k1 + k2)
 		t = t + h
 		
-		points.append("{0} {1}\n".format(t, y))
+		ts.append(t)
+		ys.append(y)
 	
-	return points
+	return ts, ys
 
 
-def euler_inverted(f, t, y, h, n):
-	# Euler Inverted (Inverso)
-	points = ["{0} {1}\n".format(t, y)]             # save point as a string with the following format: "t y\n"
-	print "Running Euler Inverted"
+def inverse_euler(f, t, y, h, n):
+	ts = [t]
+	ys = [y]
+	
+	print "Running Inverse Euler Method"
 	symbol_y = Symbol('y')                          # yn+1
 	
 	for i in range(n):
@@ -45,6 +49,7 @@ def euler_inverted(f, t, y, h, n):
 		result = solvers.solve(Eq(symbol_y, y + h * k1))    # this will solve the following equation yn+1 = yn + h*k1
 		y = result[0]                                       # the previous method returns a list instead of a number, thus...
 		
-		points.append("{0} {1}\n".format(t, y))
+		ts.append(t)
+		ys.append(y)
 	
-	return points
+	return ts, ys
