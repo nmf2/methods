@@ -36,8 +36,10 @@ def method(f, p, h, n, order):
             p.pop(-1)                                                                           # removes the last item of the list fn
             
             points.append( "{0} {1}\n".format(float(p[1].x), float(p[1].y)))
+            
             ys.append(p[1].y)
             ts.append(p[1].x)
+            print "y(%.4f) = %.7f" %(ts[-1], y[-1])
         return points, ys, ts
         
     if order == 2:
@@ -53,8 +55,10 @@ def method(f, p, h, n, order):
             p.pop(-1)                                                                           # removes the last item of the list fn
             
             points.append( "{0} {1}\n".format(float(p[1].x), float(p[1].y)))
+            
             ys.append(p[1].y)
             ts.append(p[1].x)
+            print "y(%.4f) = %.7f" %(ts[-1], y[-1])
         return points, ys, ts
     if order == 3:
         for i in range(n):
@@ -69,8 +73,10 @@ def method(f, p, h, n, order):
             p.pop(-1)                                                                           # removes the last item of the list fn
             
             points.append( "{0} {1}\n".format(float(p[1].x), float(p[1].y)))
+            
             ys.append(p[1].y)
             ts.append(p[1].x)
+            print "y(%.4f) = %.7f" %(ts[-1], y[-1])
         return points, ys, ts
         
     if order == 4:
@@ -87,8 +93,10 @@ def method(f, p, h, n, order):
             p.pop(-1)
                                                                                     # removes the last item of the list fn
             points.append( "{0} {1}\n".format(float(p[1].x), float(p[1].y)))
+            
             ys.append(p[1].y)
             ts.append(p[1].x)
+            print "y(%.4f) = %.7f" %(ts[-1], y[-1])
         return points, ys, ts
 
     if order == 5:
@@ -104,8 +112,10 @@ def method(f, p, h, n, order):
             p.pop(-1)                                                                           # removes the last item of the list fn
             
             points.append( "{0} {1}\n".format(float(p[1].x), float(p[1].y)))
+            
             ys.append(p[1].y)
             ts.append(p[1].x)
+            print "y(%.4f) = %.7f" %(ts[-1], y[-1])
         return points, ys, ts
         
     if order == 6:
@@ -122,8 +132,10 @@ def method(f, p, h, n, order):
             p.pop(-1)                                                                           # removes the last item of the list fn
             
             points.append( "{0} {1}\n".format(float(p[1].x), float(p[1].y)))
+            
             ys.append(p[1].y)
             ts.append(p[1].x)
+            print "y(%.4f) = %.7f" %(ts[-1], y[-1])
         return points, ys, ts
 
 def calc_fk(f, p):

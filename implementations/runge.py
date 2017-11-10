@@ -16,6 +16,7 @@ def method(f, t, y, h, n):
 		ts.append(t)
 		ys.append(y)
 		#points.append("{0} {1}\n".format(t,y))                  #put t in {0} and y in {1}
-
+    
+        print "y(%.4f) = %.7f" % (ts[-1], y[-1])
 		
 	return ts, ys

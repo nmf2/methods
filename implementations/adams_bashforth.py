@@ -24,8 +24,8 @@ def method(f, p, h, n, order):
             points.append("{0} {1}\n".format(float(p[0].x), float(p[0].y)))
             ts.append(p[0].x)
             ys.append(p[0].y)
+            print "y(%.4f) = %.7f" %(ts[-1], y[-1])
             
-        
         return points, ys, ts
         
     if order == 2:
@@ -40,6 +40,7 @@ def method(f, p, h, n, order):
             points.append("{0} {1}\n".format(float(p[0].x), float(p[0].y)))
             ts.append(p[0].x)
             ys.append(p[0].y)
+            print "y(%.4f) = %.7f" %(ts[-1], y[-1])
             
         return points, ys, ts
         
@@ -54,6 +55,7 @@ def method(f, p, h, n, order):
             points.append("{0} {1}\n".format(float(p[0].x), float(p[0].y)))
             ts.append(p[0].x)
             ys.append(p[0].y)
+            print "y(%.4f) = %.7f" %(ts[-1], y[-1])
             
         return points, ys, ts
         
@@ -69,6 +71,7 @@ def method(f, p, h, n, order):
             points.append("{0} {1}\n".format(float(p[0].x), float(p[0].y)))
             ts.append(p[0].x)
             ys.append(p[0].y)
+            print "y(%.4f) = %.7f" %(ts[-1], y[-1])
             
         return points, ys, ts
 
@@ -84,6 +87,7 @@ def method(f, p, h, n, order):
             points.append("{0} {1}\n".format(float(p[0].x), float(p[0].y)))
             ts.append(p[0].x)
             ys.append(p[0].y)
+            print "y(%.4f) = %.7f" %(ts[-1], y[-1])
             
         return points, ys, ts
         
@@ -100,6 +104,7 @@ def method(f, p, h, n, order):
             points.append("{0} {1}\n".format(float(p[0].x), float(p[0].y)))
             ts.append(p[0].x)
             ys.append(p[0].y)
+            print "y(%.4f) = %.7f" %(ts[-1], y[-1])
             
         return points, ys, ts
 

@@ -42,7 +42,11 @@
         That is necessary because it's fourth order.
         
         For Adams Moulton if the order is n > 1 then you only need n-1 points ( if the
-        order is n = 1, then you need one point)    
+        order is n = 1, then you need one point)
+        
+    2. After the method is selected the calculations will be made and a plot of the
+       data will be shown. Also, the points will be displayed in the terminal while
+       the plot is opened   
     
 # Final (AND MOST IMPORTANT) Step
     1. Test all the methods and give me 100% in the project.
