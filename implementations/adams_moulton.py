@@ -14,11 +14,11 @@ def method(f, p, h, n, order):
 
     # setup first point
     pts = [x for x in p]
-    
-    if order == 1: order = 2  # makes sure at least one point is asked for
-    
-    for i in range(order-1):
+    k = 0
+    if order == 1: k = 1
+    for i in range(order-1+k):
         points.insert(0,"{0} {1}\n".format(float(pts[i].x), float(pts[i].y)))
+        print "y(%.4f) = %.7f" %(pts[-i-1].x, pts[-i-1].y)
         ys.insert(0, pts[i].y)
         ts.insert(0, pts[i].x)
     

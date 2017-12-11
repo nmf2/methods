@@ -1,8 +1,9 @@
-print 'Importing some stuff, wait for it, please...'
 
-from implementations import *
+print 'Importing some stuff, wait for it, please...'
 import utils
 import os
+from implementations import *
+
 
 def main():
     def getMethod():
@@ -19,7 +20,7 @@ def main():
                     4) Runge-Kutta Method
                     5) Adams-Bashforth Method                   * You'll choose the degree later
                     6) Adams-Moulton Method                     * You'll choose the degree later
-                    7) All Single Step methods (1-4) in the same graph
+                    7) All methods in the same graph
                     
                     PS: To leave enter a different number
                 """

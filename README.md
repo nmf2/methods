@@ -20,11 +20,11 @@
             0
             1
             .05
-            40    
+            40
         If you copy and paste these four lines when selecting any single step method
         the function 1 - t + 4*y, with (t0,y0) = (0, 1), h = .1 and number of steps 10
         will be appoximated.
-        
+
         For the multi step methods, all the initial points must be given. For example:
             1 - t + 4*y
             0
@@ -40,10 +40,10 @@
         This is a valid input for Adams Bashforth of fourth order, if you notice there
         are 4 points: (0,1); (.1, 1.6..); (.2, 2.5..); (.3, 3.82..)
         That is necessary because it's fourth order.
-        
+
         For Adams Moulton if the order is n > 1 then you only need n-1 points ( if the
         order is n = 1, then you need one point)
-        
+
     2. After the method is selected the calculations will be made and a plot of the
        data will be shown. Also, the points will be displayed in the terminal while
        the plot is opened 
@@ -51,7 +51,7 @@
     PS: The seventh option uses the results from the runge kutta methods as the input for the Adams multistep
     methods. Careful with this one, the Inverse Euler method tends to explode in value and makes it difficult
     to see the other plots. Please check the scale of the y(t) axis.
-    
+
 # Final (AND MOST IMPORTANT) Step
     1. Test all the methods and give me 100% in the project.
     2. Be happy :)

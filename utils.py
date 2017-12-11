@@ -1,3 +1,4 @@
+#!/usr/bin/python2
 import sympy as sp
 import os
 import subprocess
@@ -195,13 +196,34 @@ def runAllMethods(order):
         'All Single Step methods'
         )
 
-def AllAdams():
-    ts, ys = runSimpleMethod(runge.method, 'Runge-Kutta')
+def allAdamsMoulton():
     mts = []
     mys = []
+    pts = []
+    p = []
     
     f = getFunction()
 
+    t, y = getPoint(0)
+
+    h, n = getNandH()
+
+    ts, ys = runge.method(f, t, y, h, 7)
+    p.insert(0,Point2D(ts[0], ys[0])) # takes point generated from runge kutta method
     for i in range(6):
-        t.append(ts[i])
-        y.append(ys[i])
+        o = i + 1
+        if i - 1 > 0: p.insert(0,Point2D(ts[i], ys[i])) # takes point generated from runge kutta method
+        if i == 1:
+            i = i -1
+        pts, ts5, ys5 = adams_moulton.method(f, p, h, n-i, o)
+        plot([ts5], [ys5], [''], 'Adams-Moulton of order {}'.format(o))
+        os.system('clear')
+        mts.append(ts5)
+        mys.append(ys5)
+        
+    plot(
+        mts, 
+        mys, 
+        ['1st Order', '2nd Order','3rd Order','4th Order','5th Order','6th Order'],
+        'Adams-Moulton Methods (1-6)'
+        )

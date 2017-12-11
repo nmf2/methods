@@ -8,20 +8,20 @@ def method(f, p, h, n, order):
     ys = []
     ts = []
     pts = [x for x in p]
-    print pts
 
     for i in range(order):
         points.insert(0, "{0} {1}\n".format(float(pts[i].x), float(pts[i].y)))
+        print "y(%.4f) = %.7f" %(pts[-i-1].x, pts[-i-1].y)
         ys.insert(0, pts[i].y)
         ts.insert(0, pts[i].x)
         
     if order == 1:
-        for i in range(n + order -1):
+        for i in range(n):
             fk = calc_fk(f, pts)
             
             y = pts[0].y + h * fk[0]
 
-            pts.insert(0, Point2D(float(pts[0].x + h), float(y)))           # inserts the point that was just found into the beginning of the list
+            pts.insert(0, Point2D(float(pts[0].x + h), float(y)))         # inserts the point that was just found into the beginning of the list
             pts.pop(-1)                                                   # removes the last item of the list
             
             points.append("{0} {1}\n".format(float(pts[0].x), float(pts[0].y)))
@@ -33,7 +33,7 @@ def method(f, p, h, n, order):
         return points, ts, ys
         
     if order == 2:
-        for i in range(n + order -1):
+        for i in range(n):
             fk = calc_fk(f, pts)
             
             y = pts[0].y + (h/2)*( (3)*fk[0] - fk[1] )
@@ -49,7 +49,7 @@ def method(f, p, h, n, order):
         return points, ts, ys
         
     if order == 3:
-        for i in range(n + order-1):
+        for i in range(n):
             fk = calc_fk(f, pts)
             y = pts[0].y + (h/12)*( (23)*fk[0] - (16)*fk[1] + (5)*fk[2] )
             
