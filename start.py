@@ -1,3 +1,5 @@
+print 'Importing some stuff, wait for it, please...'
+
 from implementations import *
 import utils
 import os
@@ -15,8 +17,9 @@ def main():
                     2) Inverse Euler Method
                     3) Improved Euler Method
                     4) Runge-Kutta Method
-                    5) Adams-Bashforth Method                   * You'll chose the degree later
-                    6) Adams-Moulton Method                     * You'll chose the degree later
+                    5) Adams-Bashforth Method                   * You'll choose the degree later
+                    6) Adams-Moulton Method                     * You'll choose the degree later
+                    7) All Single Step methods (1-4) in the same graph
                     
                     PS: To leave enter a different number
                 """
@@ -24,7 +27,6 @@ def main():
                 return method
             except:
                 print "Please try again, invalid input."
-        
     method = getMethod()
     while method in range(1,8):
         if method == 1:
@@ -50,25 +52,22 @@ def main():
         elif method == 5:
             os.system('clear')
             print 'Selected Adams-Bashforth Method\n'
-            while True:
-                try:
-                    order = int(input("\nPlease input the degree of the method: "))
-                    break
-                except:
-                    print "Please try again, invalid input."
+            order = utils.getOrder()
             utils.runAdamsBash(order)
             
         elif method == 6:
             os.system('clear')
             print 'Selected Adams-Moulton Method\n'
-            while True:
-                try:
-                    order = int(input("\nPlease input the degree of the method: "))
-                    break
-                except:
-                    print "Please try again, invalid input."
+            order = utils.getOrder()
+            print 'Great! Making calculations, soon the plot will be shown. Hold on, please..'
             utils.runAdamsMoulton(order)
-        
+        elif method == 7:
+            os.system('clear')
+            print 'Selected All Single Step methods\n'
+            print 'For the Adams-Moulton and Adams-Bashforth methods:\n'
+            order = utils.getOrder()
+            print 'Great! Making calculations, soon the plot will be shown. Hold on, please..'
+            utils.runAllMethods(order)
         method = getMethod()
 
 main()

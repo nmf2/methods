@@ -19,8 +19,8 @@
             1 - t + 4*y
             0
             1
-            .1
-            10    
+            .05
+            40    
         If you copy and paste these four lines when selecting any single step method
         the function 1 - t + 4*y, with (t0,y0) = (0, 1), h = .1 and number of steps 10
         will be appoximated.
@@ -46,7 +46,11 @@
         
     2. After the method is selected the calculations will be made and a plot of the
        data will be shown. Also, the points will be displayed in the terminal while
-       the plot is opened   
+       the plot is opened 
+
+    PS: The seventh option uses the results from the runge kutta methods as the input for the Adams multistep
+    methods. Careful with this one, the Inverse Euler method tends to explode in value and makes it difficult
+    to see the other plots. Please check the scale of the y(t) axis.
     
 # Final (AND MOST IMPORTANT) Step
     1. Test all the methods and give me 100% in the project.
